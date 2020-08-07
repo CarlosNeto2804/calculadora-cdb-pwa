@@ -95,11 +95,11 @@
                     <v-icon color="info">mdi-chart-areaspline-variant </v-icon>
                   </v-btn>
                 </v-list-item-action>
-                <v-list-item-action>
+                <!-- <v-list-item-action>
                   <v-btn  icon @click="info(item)">
                     <v-icon color="error">mdi-delete </v-icon>
                   </v-btn>
-                </v-list-item-action>
+                </v-list-item-action> -->
               </v-list-item>
             </v-list>
           </v-timeline-item>

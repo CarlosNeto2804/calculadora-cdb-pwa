@@ -1,6 +1,5 @@
 import axios from "axios";
-// const url = 'https://api-calculadora-cdb.herokuapp.com';
- const url = 'http://localhost:3000';
+ const url = process.env.VUE_APP_APIHOST
 export default {
   calculate(dataToCalc) {
     return axios
