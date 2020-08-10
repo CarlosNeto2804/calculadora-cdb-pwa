@@ -18,7 +18,7 @@
               </v-btn>
             </v-col>
             <v-col cols="12">
-              <v-btn block color="blue" dark>
+              <v-btn block color="blue" @click="login('facebook')" dark>
                 <v-icon class="mr-2">mdi-facebook</v-icon>Facebook
               </v-btn>
             </v-col>
