@@ -23,8 +23,10 @@ export default {
   }),
   methods: {
     async checkIfHaveUser() {
-      const payload = this.$route.query;
-      await this.$store.dispatch("checkUserSesstion", payload);
+      if (this.$route.query) {
+        const payload = this.$route.query;
+        await this.$store.dispatch("checkUserSesstion", payload);
+      }
     },
   },
   async mounted() {
