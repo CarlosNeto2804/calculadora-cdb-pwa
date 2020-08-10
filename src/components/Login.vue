@@ -4,8 +4,10 @@
       <v-card>
         <v-card-title class="headline">Entrar</v-card-title>
         <v-card-text>
-          Faça login com sua rede social e receba gratiutamente a geração de
-          gráficos
+          Faça login com sua rede social e receba gratiutamente:
+          <p>- Gerenciar histórico de consultas</p>
+          <p>- Exportar o gráfico em fomato jpg</p>
+          <p>- Dentre outras funçoes</p>
         </v-card-text>
         <v-card-text>
           <v-row>
@@ -19,6 +21,9 @@
               <v-btn block color="blue" dark>
                 <v-icon class="mr-2">mdi-facebook</v-icon>Facebook
               </v-btn>
+            </v-col>
+            <v-col cols="12" class="text-center">
+              <a target="_blank" href="termos.html" >politica e termos de privacidade</a>
             </v-col>
           </v-row>
         </v-card-text>

@@ -5,7 +5,10 @@
         <v-form ref="form" v-model="valid" lazy-validation>
           <v-row justify="center" align="center">
             <v-col cols="12">
-              <h4 class="text-center">Os calculos são feitos com base nos dados entre as datas 04/01/2010 e 03/12/2019 </h4>
+              <h4 class="text-center">
+                Os calculos são feitos com base nos dados entre as datas
+                04/01/2010 e 03/12/2019
+              </h4>
             </v-col>
             <v-col cols="12" md="3">
               <v-text-field
@@ -84,9 +87,9 @@
                     </v-col>
                     <v-col cols="12" md="3">
                       <v-list-item-title>Valor Calculado</v-list-item-title>
-                      <v-list-item-subtitle>R$ {{
-                        item.info.currentValue
-                      }}</v-list-item-subtitle>
+                      <v-list-item-subtitle
+                        >R$ {{ item.info.currentValue }}</v-list-item-subtitle
+                      >
                     </v-col>
                   </v-row>
                 </v-list-item-content>
@@ -95,11 +98,11 @@
                     <v-icon color="info">mdi-chart-areaspline-variant </v-icon>
                   </v-btn>
                 </v-list-item-action>
-                <!-- <v-list-item-action>
-                  <v-btn  icon @click="info(item)">
+                <v-list-item-action>
+                  <v-btn  v-if="isLogged" icon @click="deleteItem(item)">
                     <v-icon color="error">mdi-delete </v-icon>
                   </v-btn>
-                </v-list-item-action> -->
+                </v-list-item-action>
               </v-list-item>
             </v-list>
           </v-timeline-item>
@@ -117,29 +120,43 @@ export default {
   components: {
     Graphic,
   },
+  computed:{
+    isLogged() {
+      return this.$store.getters["getUserLogged"];
+    }
+  },
   data: () => ({
     items: [],
     dateMask: "##/##/####",
     dataToCalc: {
-      investmentDate: "20/05/2015",
+      investmentDate: "",
       cdbRate: 100,
-      currentDate: "20/06/2018",
+      currentDate: "",
     },
     loading: false,
     rules: [(v) => !!v || "Campo Obrigatório!"],
     valid: true,
   }),
-  
-
+  beforeMount(){
+    this.items = JSON.parse(localStorage.getItem('list_items')) || []
+  },
   methods: {
+    deleteItem(item) {
+      const index = this.items.indexOf(item);
+      confirm("Deseja remover a consulta") && this.items.splice(index, 1);
+    },
+    saveOnLocalStorage() {
+      localStorage.setItem('list_items', JSON.stringify(this.items))
+    },
     async calculate() {
       if (this.$refs.form.validate()) {
         this.loading = true;
         try {
           const obj = this.getObjToCalc();
           const prices = await CalculateService.calculate(obj);
-          const info = this.getObjToList(prices[prices.length-1].unitPrice);
+          const info = this.getObjToList(prices[prices.length - 1].unitPrice);
           this.items.push({ info, prices });
+          this.saveOnLocalStorage()
           this.clear();
         } catch (error) {
           console.log(error);
@@ -173,7 +190,7 @@ export default {
         investmentDate: this.dataToCalc.investmentDate,
         cdbRate: this.dataToCalc.cdbRate,
         currentDate: this.dataToCalc.currentDate,
-        currentValue:item
+        currentValue: item,
       };
     },
   },

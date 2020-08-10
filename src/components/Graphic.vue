@@ -2,12 +2,15 @@
   <v-dialog v-model="dialog">
     <v-card class="mx-auto text-center" max-width="auto">
       <v-row justify="center" align="center">
+        <v-col v-if="!isLogged" cols="12">
+          <span>Cadastre-se gratuitamente ou faça login para obter recursos de administrador</span>
+        </v-col>
         <v-col cols="12" md="6" >
           <plotly
             :data="data"
             :layout="layout"
             :responsive="true"
-            :display-mode-bar="true"
+            :display-mode-bar="isLogged"
             :scrollZoom="true"
           />
         </v-col>
@@ -66,6 +69,9 @@ export default {
   computed:{
     isMobile(){
       return this.$vuetify.breakpoint.smAndDown
+    },
+    isLogged() {
+      return this.$store.getters["getUserLogged"];
     }
   },
   data: () => ({
