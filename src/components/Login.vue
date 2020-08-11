@@ -47,8 +47,8 @@ export default {
       this.$store.commit("changeLoginState");
     },
     login(provider){
-        // const host = 'https://api-calculadora-cdb.herokuapp.com'
-        const host = 'http://localhost:3000'
+        const host = 'https://api-calculadora-cdb.herokuapp.com'
+        // const host = 'http://localhost:3000'
         const url = `${host}/social-login/${provider}`
         location.href = url;
     }
