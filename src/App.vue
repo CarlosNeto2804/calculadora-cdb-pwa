@@ -23,7 +23,7 @@ export default {
   }),
   methods: {
     async checkIfHaveUser() {
-      if (this.$route.query) {
+      if (this.$route.query.id) {
         const payload = this.$route.query;
         await this.$store.dispatch("checkUserSesstion", payload);
       }
