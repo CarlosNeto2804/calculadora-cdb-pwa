@@ -22,15 +22,17 @@ export default {
     //
   }),
   methods: {
-    async checkIfHaveUser() {
-      if (this.$route.query.id) {
-        const payload = this.$route.query;
-        await this.$store.dispatch("checkUserSesstion", payload);
-      }
+    checkIfHaveUser() {
+      setTimeout(() => {
+        if (this.$route.query.id) {
+          const payload = this.$route.query;
+          this.$store.dispatch("checkUserSesstion", payload);
+        }
+      }, 2000);
     },
   },
-  async mounted() {
-    await this.checkIfHaveUser();
+   beforeMount() {
+     this.checkIfHaveUser();
   },
   beforeCreate() {
     const uri = window.location.toString();

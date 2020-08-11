@@ -49,7 +49,6 @@ export default new Vuex.Store({
       else if(payload != null) { 
         const user = payload
         user.logged = true
-        console.log(payload, user);
         commit('startSession', user);
       }else return
     }
